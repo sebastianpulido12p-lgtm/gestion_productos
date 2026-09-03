@@ -1,18 +1,21 @@
-<h1> Listado Producto </h1>
+<h1>Listado Producto</h1>
 
-<table>
+<table border="1">
+
     <tr>
-        <th>nombre</th>
-        <th>precio</th>
-        <th>categoria</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Categoria</th>
     </tr>
-    <?php foreach ($productos as $producto): ?>
-            <tr>
-                <td><?= $producto['nombre'] ?></td>
-                <td><?= $producto['precio'] ?></td>
-                <td><?= $producto['categoria'] ?></td>
-            </tr>
-        <?php endforeach; ?>
 
-        
+    <?php foreach ($productos as $producto): ?>
+
+        <tr>
+            <td><?= $producto['nombre'] ?></td>
+            <td><?= $producto['precio'] ?></td>
+            <td><?= $producto['categoria'] ?></td>
+        </tr>
+
+    <?php endforeach; ?>
+
 </table>

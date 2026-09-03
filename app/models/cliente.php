@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../../config/Database.php";
 
-class Producto {
+class Cliente {
     private $connection;
 
     public function __construct(){
@@ -11,7 +11,7 @@ class Producto {
     }
 
     public function getAll(){
-        $sql = "SELECT * FROM producto";
+        $sql = "SELECT * FROM cliente";
 
         $consulta = $this->connection->query($sql);
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
