@@ -17,15 +17,21 @@ class producto
         $sql = "SELECT
                     producto.nombre AS producto_nombre,
                     producto.precio,
-                    producto.categoria AS producto_categoria,
+                    producto.id_categoria,
+                    categoria.nombre AS categoria_nombre,
                     producto.id_proveedor,
                     proveedores.nombre AS proveedor_nombre
                 FROM producto
                 INNER JOIN proveedores
-                ON producto.id_proveedor = proveedores.idproveedores";
+                ON producto.id_proveedor = proveedores.idproveedores
+                INNER JOIN categoria
+                    ON producto.id_categoria = categoria.id_categoria";
+
     $consulta = $this->connection->query($sql);
-    return $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function getById($id)
     {
@@ -33,15 +39,18 @@ class producto
                     producto.id_producto,
                     producto.nombre AS producto_nombre,
                     producto.precio,
-                    producto.categoria AS producto_categoria,
+                    producto.id_categoria,
+                    categoria.nombre AS categoria_nombre,
                     producto.id_proveedor,
                     proveedores.nombre AS proveedor_nombre
                 FROM producto
                 INNER JOIN proveedores
-                ON producto.id_proveedor = proveedores.idproveedores
+                    ON producto.id_proveedor = proveedores.idproveedores
+                INNER JOIN categoria
+                    ON producto.id_categoria = categoria.id_categoria
                 WHERE producto.id_producto = :id";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
