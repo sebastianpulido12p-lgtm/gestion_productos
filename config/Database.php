@@ -19,11 +19,24 @@ class Database {
     }
 
     public function connect(){
-        $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname}";
+        try {
 
-        $this->connection = new PDO($dsn, $this->user, $this->password);
+            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname}"; 
+ 
+            $this->connection = new PDO($dsn, $this->user, $this->password);
 
-        return $this->connection;
-    }
+            $this->connection->setAttribute(
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            );
+
+            return $this->connection; 
+
+        } catch (PDOException $e) {
+
+            echo "Error de conexión: " . $e->getMessage();
+
+        }
+    } 
 }
 
